@@ -114,7 +114,7 @@ java -cp out Bench
 - Additional checks cover overlapping marker hits, repeated A positions, and two different DNA words with an actual equal rolling hash.
 - 150 small trees pass exhaustive minimum-cost and minimum-count cover checks, and longest-chain checks against BFS from every vertex.
 
-The raw validation logs are saved in `output/check-results.txt` and `output/extra-checks.txt`.
+The raw validation logs are saved in `output/check-results.txt` and `output/extra-checks.txt`. The supplied checker also generates lab pages for its examples, so run `java -cp out Main` again afterwards to restore the page for your personal data.
 
 ## Git and submission
 
