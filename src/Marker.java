@@ -4,6 +4,8 @@ import java.util.*;
  * Missions 3 and 4. Find a word in a long text.
  */
 public class Marker {
+    private static final long BASE = 31;
+    private static final long MOD = 1_000_000_007;
 
     /**
      * Mission 3a. The prefix function of p. pi[i] = the length of the longest proper prefix of p[0..i] that is
@@ -60,7 +62,44 @@ public class Marker {
      * Example: a = "ACGTAC", b = "TTACGT", k = 4: the words of a are ACGT, CGTA, GTAC; only ACGT is in b, so the answer is 1.
      */
     public static int sharedWords(String a, String b, int k) {
-        // TODO Mission 4
-        return -1;
+        if (k <= 0 || a.length() < k || b.length() < k) return 0;
+        long power = 1;
+        for (int i = 1; i < k; i++) power = power * BASE % MOD;
+
+        Map<Long, List<Integer>> windows = new HashMap<>();
+        long hash = 0;
+        for (int i = 0; i < k; i++) hash = (hash * BASE + b.charAt(i)) % MOD;
+        for (int i = 0; i + k <= b.length(); i++) {
+            if (i > 0) hash = roll(hash, b.charAt(i - 1), b.charAt(i + k - 1), power);
+            windows.computeIfAbsent(hash, key -> new ArrayList<>()).add(i);
+        }
+
+        hash = 0;
+        for (int i = 0; i < k; i++) hash = (hash * BASE + a.charAt(i)) % MOD;
+        int count = 0;
+        for (int i = 0; i + k <= a.length(); i++) {
+            if (i > 0) hash = roll(hash, a.charAt(i - 1), a.charAt(i + k - 1), power);
+            List<Integer> candidates = windows.get(hash);
+            if (candidates == null) continue;
+            // Equal hashes are only candidates. Compare letters to rule out collisions.
+            for (int j : candidates) {
+                if (sameWord(a, i, b, j, k)) {
+                    count++;
+                    break; // Count this position in A once, even if B has many copies.
+                }
+            }
+        }
+        return count;
+    }
+    private static long roll(long hash, char removed, char added, long power) {
+        long rest = (hash - removed * power % MOD + MOD) % MOD;
+        return (rest * BASE + added) % MOD;
+    }
+
+    private static boolean sameWord(String a, int i, String b, int j, int k) {
+        for (int offset = 0; offset < k; offset++) {
+            if (a.charAt(i + offset) != b.charAt(j + offset)) return false;
+        }
+        return true;
     }
 }
