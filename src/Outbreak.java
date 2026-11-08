@@ -17,8 +17,13 @@ public class Outbreak {
      * Main calls this twice: with all costs equal to 1 (the line "Tests needed") and with the real costs ("Cheapest testing").
      */
     public static boolean[] cheapestTests(int n, int[][] nb, int[] cost) {
-        // TODO Mission 5a
-        return new boolean[n];
+        boolean[] tested = new boolean[n];
+        if (n == 0) return tested;
+        long[] take = new long[n];
+        long[] skip = new long[n];
+        testingCosts(0, -1, nb, cost, take, skip);
+        restoreTests(0, -1, take[0] <= skip[0], nb, take, skip, tested);
+        return tested;
     }
 
     /**
@@ -27,7 +32,48 @@ public class Outbreak {
      * Example: a line 0-1-2-3 has chain 3; a star with centre 0 and leaves 1, 2, 3 has chain 2.
      */
     public static int longestChain(int n, int[][] nb) {
-        // TODO Mission 5b
-        return -1;
+        if (n == 0) return 0;
+        int[] longest = {0};
+        depth(0, -1, nb, longest);
+        return longest[0];
+    }
+    private static void testingCosts(int v, int parent, int[][] nb, int[] cost,
+                                     long[] take, long[] skip) {
+        take[v] = cost[v];
+        for (int child : nb[v]) {
+            if (child == parent) continue;
+            testingCosts(child, v, nb, cost, take, skip);
+            // If v is skipped, its children must cover the links to v.
+            take[v] += Math.min(take[child], skip[child]);
+            skip[v] += take[child];
+        }
+    }
+
+    private static void restoreTests(int v, int parent, boolean test, int[][] nb,
+                                     long[] take, long[] skip, boolean[] tested) {
+        tested[v] = test;
+        for (int child : nb[v]) {
+            if (child == parent) continue;
+            boolean testChild = !test || take[child] <= skip[child];
+            restoreTests(child, v, testChild, nb, take, skip, tested);
+        }
+    }
+
+    private static int depth(int v, int parent, int[][] nb, int[] longest) {
+        int first = 0;
+        int second = 0;
+        for (int child : nb[v]) {
+            if (child == parent) continue;
+            int branch = depth(child, v, nb, longest) + 1;
+            if (branch > first) {
+                second = first;
+                first = branch;
+            } else if (branch > second) {
+                second = branch;
+            }
+        }
+        // A longest path through v joins its two deepest branches.
+        longest[0] = Math.max(longest[0], first + second);
+        return first;
     }
 }
