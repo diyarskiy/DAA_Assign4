@@ -1,0 +1,3 @@
+200 short strain pairs: edit distance and LCS passed independent checks.
+300 string cases, overlapping hits, repeated words and a real hash collision passed.
+150 small trees: both covers passed exhaustive subset checks; diameter passed BFS checks.

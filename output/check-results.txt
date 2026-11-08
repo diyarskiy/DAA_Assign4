@@ -1,0 +1,8 @@
+Compiles.
+
+Examples:
+  tiny: all 9 lines are right
+  small: all 9 lines are right
+  dense: all 9 lines are right
+
+All examples pass. Now run it on your own data: java -cp out Main
