@@ -1,8 +1,8 @@
 # Assignment 4. Patient Zero
 
 Student ID: **250245**  
-Name: **daniarov** (Git name; full name to be confirmed)  
-Group: **Not provided**
+Name: **Diyar Daniyarov**  
+Group: **SE-2510**
 
 ## Run
 
@@ -123,7 +123,8 @@ Each coding mission has its own commit on main. All commits use the requested au
 - [x] Java code and four personal input files are included.
 - [x] Examples and additional checks pass.
 - [x] Output, explanation answers, AI use, timings and complexity are recorded.
-- [ ] Confirm full name and group, and review/adapt the code and explanations.
+- [x] Full name and group confirmed: Diyar Daniyarov, SE-2510.
+- [ ] Review/adapt the code and explanations.
 - [ ] Save the real browser screenshot as `output/outbreak.png` and commit it.
 - [ ] Push main to a public GitHub repository and verify access while signed out.
 - [ ] Submit the public repository link in Moodle before the deadline.
