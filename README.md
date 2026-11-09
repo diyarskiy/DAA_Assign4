@@ -37,9 +37,9 @@ Longest chain: 31
 
 ## Lab console screenshot
 
-The lab console is generated at `output/outbreak.html`. Open it in a browser to see the genome, algorithm animations, and selected people.
+The lab console is generated at `output/outbreak.html`. All five missions and all nine results agree with the lab.
 
-**Pending:** save a screenshot of the whole lab page as `output/outbreak.png` and commit it. Automated capture was blocked because the browser tool does not allow opening local file URLs; no screenshot has been fabricated.
+![Patient Zero lab console](output/outbreak.png)
 
 ## Questions
 
@@ -125,6 +125,6 @@ Each coding mission has its own commit on main. All commits use the requested au
 - [x] Output, explanation answers, AI use, timings and complexity are recorded.
 - [x] Full name and group confirmed: Diyar Daniyarov, SE-2510.
 - [ ] Review/adapt the code and explanations.
-- [ ] Save the real browser screenshot as `output/outbreak.png` and commit it.
-- [ ] Push main to a public GitHub repository and verify access while signed out.
-- [ ] Submit the public repository link in Moodle before the deadline.
+- [x] Real browser screenshot saved as `output/outbreak.png` and included above.
+- [x] Main is published in the public GitHub repository.
+- [x] Repository link submitted in Moodle (confirmed by the student).
